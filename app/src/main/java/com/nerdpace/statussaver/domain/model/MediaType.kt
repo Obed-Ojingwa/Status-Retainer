@@ -1,4 +1,8 @@
 package com.nerdpace.statussaver.domain.model
 
-class MediaType {
+
+
+enum class MediaType {
+    PHOTO,
+    VIDEO
 }
