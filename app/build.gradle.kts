@@ -41,6 +41,7 @@ android {
 
 dependencies {
     val room_version = "2.8.4"
+    val work_version = "2.11.1"
 
 
     implementation("androidx.room:room-runtime:${room_version}")
@@ -48,6 +49,13 @@ dependencies {
 
     implementation("androidx.room:room-ktx:${room_version}")
 
+
+
+    implementation("androidx.work:work-runtime-ktx:${work_version}")
+
+    implementation("androidx.work:work-gcm:${work_version}")
+
+    implementation("androidx.work:work-multiprocess:${work_version}")
 
 
     implementation("io.coil-kt.coil3:coil-compose:3.4.0")
