@@ -18,13 +18,7 @@ data class MainUiState(
     val needsSafAccess: Boolean = false
 )
 
-data class PreviewUiState(
-    val media: StatusMedia? = null,
-    val isLoading: Boolean = false,
-    val isSaving: Boolean = false,
-    val saveSuccess: Boolean = false,
-    val error: String? = null
-)
+
 
 sealed class UiEvent {
     data class ShowMessage(val message: String) : UiEvent()
