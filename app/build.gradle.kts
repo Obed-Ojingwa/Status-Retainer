@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.hilt.work)
+    implementation(libs.androidx.material3)
     val room_version = "2.8.4"
     val work_version = "2.11.1"
 
