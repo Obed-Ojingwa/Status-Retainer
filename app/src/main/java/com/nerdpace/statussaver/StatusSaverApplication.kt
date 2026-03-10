@@ -11,21 +11,29 @@ import com.nerdpace.statussaver.data.repository.StatusRepositoryImpl
 import com.nerdpace.statussaver.worker.CleanupScheduler
 import com.nerdpace.statussaver.worker.CleanupWorkerFactory
 
+
+
+
+
+// Application Class
+
+
+
+import androidx.hilt.work.HiltWorkerFactory
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+
+@HiltAndroidApp
 class StatusSaverApplication : Application(), Configuration.Provider {
 
-    // In a real app, use DI framework like Hilt or Koin
-    private val database by lazy { StatusDatabase.getInstance(this) }
-    private val repository by lazy { StatusRepositoryImpl(this, database.statusMediaDao()) }
-    private val workerFactory by lazy { CleanupWorkerFactory(repository) }
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
 
-        // Schedule periodic cleanup on app startup
+        // Schedule periodic cleanup
         CleanupScheduler.scheduleCleanup(this)
-
-        // Optionally trigger immediate cleanup on app startup
-        // CleanupScheduler.triggerImmediateCleanup(this)
     }
 
     override fun getWorkManagerConfiguration(): Configuration {
@@ -35,3 +43,28 @@ class StatusSaverApplication : Application(), Configuration.Provider {
             .build()
     }
 }
+
+//class StatusSaverApplication : Application(), Configuration.Provider {
+//
+//    // In a real app, use DI framework like Hilt or Koin
+//    private val database by lazy { StatusDatabase.getInstance(this) }
+//    private val repository by lazy { StatusRepositoryImpl(this, database.statusMediaDao()) }
+//    private val workerFactory by lazy { CleanupWorkerFactory(repository) }
+//
+//    override fun onCreate() {
+//        super.onCreate()
+//
+//        // Schedule periodic cleanup on app startup
+//        CleanupScheduler.scheduleCleanup(this)
+//
+//        // Optionally trigger immediate cleanup on app startup
+//        // CleanupScheduler.triggerImmediateCleanup(this)
+//    }
+//
+//    override fun getWorkManagerConfiguration(): Configuration {
+//        return Configuration.Builder()
+//            .setWorkerFactory(workerFactory)
+//            .setMinimumLoggingLevel(android.util.Log.INFO)
+//            .build()
+//    }
+//}

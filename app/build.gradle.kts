@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.hilt.work)
     val room_version = "2.8.4"
     val work_version = "2.11.1"
 
@@ -64,6 +65,8 @@ dependencies {
 
 
 
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+    implementation("androidx.hilt:hilt-work:1.0.0")
     implementation("com.google.dagger:hilt-android:2.57.1")
 
 
