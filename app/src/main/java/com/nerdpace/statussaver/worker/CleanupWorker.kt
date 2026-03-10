@@ -4,32 +4,34 @@ package com.nerdpace.statussaver.worker
 
 
 import android.content.Context
+import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.nerdpace.statussaver.domain.repository.StatusRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
-class CleanupWorker(
-    context: Context,
-    workerParams: WorkerParameters,
+
+@HiltWorker
+class CleanupWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted workerParams: WorkerParameters,
     private val repository: StatusRepository
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         return@withContext try {
-            // Clean up expired media (older than 7 days and not saved)
             val deletedCount = repository.cleanupExpiredMedia()
 
-            // Log results
-            val outputData = workDataOf(
-                KEY_DELETED_COUNT to deletedCount,
-                KEY_TIMESTAMP to System.currentTimeMillis()
+            Result.success(
+                workDataOf(
+                    KEY_DELETED_COUNT to deletedCount,
+                    KEY_TIMESTAMP to System.currentTimeMillis()
+                )
             )
-
-            Result.success(outputData)
         } catch (e: Exception) {
-            // Retry on failure
             if (runAttemptCount < 3) {
                 Result.retry()
             } else {
