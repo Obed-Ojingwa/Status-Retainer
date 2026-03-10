@@ -13,11 +13,14 @@ import com.nerdpace.statussaver.domain.model.WhatsAppSource
 import com.nerdpace.statussaver.domain.repository.StatusRepository
 import com.nerdpace.statussaver.presentation.model.MainUiState
 import com.nerdpace.statussaver.presentation.model.UiEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     application: Application,
     private val repository: StatusRepository
 ) : AndroidViewModel(application) {

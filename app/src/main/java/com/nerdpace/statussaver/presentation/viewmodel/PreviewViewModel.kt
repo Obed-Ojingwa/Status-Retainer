@@ -12,11 +12,14 @@ import androidx.lifecycle.viewModelScope
 import com.nerdpace.statussaver.domain.repository.StatusRepository
 import com.nerdpace.statussaver.presentation.model.PreviewUiState
 import com.nerdpace.statussaver.presentation.model.UiEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class PreviewViewModel(
+@HiltViewModel
+class PreviewViewModel @Inject constructor(
     application: Application,
     private val savedStateHandle: SavedStateHandle,
     private val repository: StatusRepository
