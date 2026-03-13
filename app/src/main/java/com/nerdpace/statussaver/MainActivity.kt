@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.nerdpace.statussaver.presentation.navigation.AppNavigation
 import com.nerdpace.statussaver.ui.theme.StatusSaverTheme
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
