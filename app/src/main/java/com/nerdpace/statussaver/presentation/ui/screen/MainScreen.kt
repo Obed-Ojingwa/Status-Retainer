@@ -81,6 +81,7 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+
         ) {
             // Source selector
             SourceSelector(
@@ -90,6 +91,7 @@ fun MainScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             )
+
 
             // Tab selector
             TabRow(selectedTabIndex = if (uiState.selectedTab == MediaType.PHOTO) 0 else 1) {
